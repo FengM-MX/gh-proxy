@@ -1,16 +1,21 @@
 'use strict'
 
+/**
+ * static files (404.html, sw.js, conf.js)
+ */
 //上下文路径，如果想要通过指定上下文访问，例如：example.com/gh/*，则CONTEXT_PATH改为 '/gh/'，CONTEXT_PATH中可以不以/开头和结尾，代码中会自动添加
 //访问网站时需要通过指定的上下文访问，例如：example.com/gh/
-const CONTEXT_PATH = '/gh/945b6cb6-0496-4cbd-a47e-b05c5de09e28/'
+var INPUT_CONTEXT_PATH = '/gh/945b6cb6-0496-4cbd-a47e-b05c5de09e28/'
 
 //防止出现在前后未添加/，手动添加
-if (!CONTEXT_PATH.startsWith('/')) {
-    CONTEXT_PATH = '/' + CONTEXT_PATH;
+if (!INPUT_CONTEXT_PATH.startsWith('/')) {
+    INPUT_CONTEXT_PATH = '/' + INPUT_CONTEXT_PATH;
 }
-if (!CONTEXT_PATH.endsWith('/')) {
-    CONTEXT_PATH = CONTEXT_PATH + '/';
+if (!INPUT_CONTEXT_PATH.endsWith('/')) {
+    INPUT_CONTEXT_PATH = INPUT_CONTEXT_PATH + '/';
 }
+//设置真正的页面上下文
+const CONTEXT_PATH = INPUT_CONTEXT_PATH;
 
 
 // 分支文件使用jsDelivr镜像的开关，0为关闭，默认关闭
@@ -492,7 +497,7 @@ var htmlContent = `<!DOCTYPE html>
                                         >
                                     </div>
                                     <div class="button-field">
-                                        <button class="btn waves-effect waves-light blue convert-btn" type="submit" name="action">
+                                        <button class="btn waves-effect waves-light blue convert-btn" id="convertBt" type="button">
                                             <i class="material-icons left">flash_on</i>
                                             转换链接
                                         </button>
@@ -514,11 +519,11 @@ var htmlContent = `<!DOCTYPE html>
                         </div>
                     </div>
                     <div class="card-action action-buttons result-actions">
-                        <button id="copyBtn" class="btn-small waves-effect waves-light green">
+                        <button id="copyBtn" class="btn-small waves-effect waves-light green" type="button">
                             <i class="material-icons left">content_copy</i>
                             复制
                         </button>
-                        <button id="openBtn" class="btn-small waves-effect waves-light orange">
+                        <button id="openBtn" class="btn-small waves-effect waves-light orange" type="button">
                             <i class="material-icons left">open_in_new</i>
                             打开
                         </button>
@@ -538,11 +543,9 @@ var htmlContent = `<!DOCTYPE html>
         });
 
         // 表单提交处理
-        document.getElementById('urlForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
+        document.getElementById('convertBt').addEventListener('click', function() {
             const inputUrl = document.getElementById('urlInput').value;
-            const baseUrl = window.location.href.substr(0, window.location.href.lastIndexOf('/') + 1);
+            const baseUrl = window.location.origin + '${CONTEXT_PATH}';
             const convertedUrl = baseUrl + inputUrl;
             
             // 显示结果
