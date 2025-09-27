@@ -105,14 +105,6 @@ async function fetchHandler(e) {
     // 找到上下文起始位置，并加上上下文的路径
     const githubIndex = urlStr.indexOf(CONTEXT_PATH) + CONTEXT_PATH.length;
     path = urlStr.substr(githubIndex).replace(/^https?:\/+/, 'https://');
-    //如果当前的路径不是指定上下文路径，并且路径不是以Http或Https开头，则重定向到错误页面
-    if (path != "" && !path.startsWith("https://")) {
-        return new Response(errHtml, {
-            headers: {
-                'content-type': 'text/html;charset=UTF-8',
-            }
-        });
-    }
     //根据上下文取值，走到不同的分支
     if (path.search(exp1) === 0 || path.search(exp5) === 0 || path.search(exp6) === 0 || path.search(exp3) === 0 || path.search(exp4) === 0) {
         return httpHandler(req, path)
@@ -128,6 +120,14 @@ async function fetchHandler(e) {
         const newUrl = path.replace(/(?<=com\/.+?\/.+?)\/(.+?\/)/, '@$1').replace(/^(?:https?:\/\/)?raw\.(?:githubusercontent|github)\.com/, 'https://cdn.jsdelivr.net/gh')
         return Response.redirect(newUrl, 302)
     } else {
+        //如果当前访问的不是github,并且路径不是指定上下文路径，并且路径不是以Http或Https开头，则重定向到错误页面
+        if (path != "") {
+            return new Response(errHtml, {
+                headers: {
+                    'content-type': 'text/html;charset=UTF-8',
+                }
+            });
+        }
         path = CONTEXT_PATH + path;
         return new Response(htmlContent, {
             headers: {
