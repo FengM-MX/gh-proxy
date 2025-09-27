@@ -280,7 +280,7 @@
                                         >
                                     </div>
                                     <div class="button-field">
-                                        <button class="btn waves-effect waves-light blue convert-btn" type="submit" name="action">
+                                        <button class="btn waves-effect waves-light blue convert-btn" id="convertBt" type="button">
                                             <i class="material-icons left">flash_on</i>
                                             转换链接
                                         </button>
@@ -302,11 +302,11 @@
                         </div>
                     </div>
                     <div class="card-action action-buttons result-actions">
-                        <button id="copyBtn" class="btn-small waves-effect waves-light green">
+                        <button id="copyBtn" class="btn-small waves-effect waves-light green" type="button">
                             <i class="material-icons left">content_copy</i>
                             复制
                         </button>
-                        <button id="openBtn" class="btn-small waves-effect waves-light orange">
+                        <button id="openBtn" class="btn-small waves-effect waves-light orange" type="button">
                             <i class="material-icons left">open_in_new</i>
                             打开
                         </button>
@@ -326,11 +326,9 @@
         });
 
         // 表单提交处理
-        document.getElementById('urlForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
+        document.getElementById('convertBt').addEventListener('click', function() {
             const inputUrl = document.getElementById('urlInput').value;
-            const baseUrl = window.location.href.substr(0, window.location.href.lastIndexOf('/') + 1);
+            const baseUrl = window.location.origin + `'${CONTEXT_PATH}'`;
             const convertedUrl = baseUrl + inputUrl;
             
             // 显示结果
