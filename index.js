@@ -1,11 +1,18 @@
 'use strict'
 
-/**
- * static files (404.html, sw.js, conf.js)
- */
-//上下文路径，如果想要通过指定上下文访问，例如：example.com/gh/*，将CONTEXT_PATH改为 '/gh/'，注意，少一个杠都会错！
+//上下文路径，如果想要通过指定上下文访问，例如：example.com/gh/*，则CONTEXT_PATH改为 '/gh/'，CONTEXT_PATH中可以不以/开头和结尾，代码中会自动添加
 //访问网站时需要通过指定的上下文访问，例如：example.com/gh/
-const CONTEXT_PATH = '/gh/'
+const CONTEXT_PATH = '/gh/945b6cb6-0496-4cbd-a47e-b05c5de09e28/'
+
+//防止出现在前后未添加/，手动添加
+if (!CONTEXT_PATH.startsWith('/')) {
+    CONTEXT_PATH = '/' + CONTEXT_PATH;
+}
+if (!CONTEXT_PATH.endsWith('/')) {
+    CONTEXT_PATH = CONTEXT_PATH + '/';
+}
+
+
 // 分支文件使用jsDelivr镜像的开关，0为关闭，默认关闭
 const Config = {
     jsdelivr: 0
@@ -94,7 +101,7 @@ async function fetchHandler(e) {
     const githubIndex = urlStr.indexOf(CONTEXT_PATH) + CONTEXT_PATH.length;
     path = urlStr.substr(githubIndex).replace(/^https?:\/+/, 'https://');
     //如果当前的路径不是指定上下文路径，并且路径不是以Http或Https开头，则重定向到错误页面
-    if(path != "" && !path.startsWith("https://")){
+    if (path != "" && !path.startsWith("https://")) {
         return new Response(errHtml, {
             headers: {
                 'content-type': 'text/html;charset=UTF-8',
