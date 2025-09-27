@@ -2,7 +2,7 @@
 
 ## 简介
 
-github release、archive以及项目文件的加速项目，支持clone，有Cloudflare Workers无服务器版本以及Python版本
+github release、archive以及项目文件的加速项目，修改自[hunshcn/gh-proxy，](https://github.com/hunshcn/gh-proxy/tree/master/app)，固化了works中加载页面的位置以及修改了页面显示的效果，增加了非指定上下文无法访问的控制，防止非法访问
 
 
 ## cf worker版本部署
@@ -15,7 +15,7 @@ github release、archive以及项目文件的加速项目，支持clone，有Clo
 
 `ASSET_URL`是静态资源的url（实际上就是现在显示出来的那个输入框单页面）
 
-`PREFIX`是前缀，默认（根路径情况为"/"），如果自定义路由为example.com/gh/*，请将PREFIX改为 '/gh/'，注意，少一个杠都会错！
+`PREFIX`是前缀，默认（根路径情况为"/gh"），如果自定义路由为example.com/gh/*，请将PREFIX改为 '/gh/'，注意，少一个杠都会错！建议PREFIX通过UUID生成，防止非法访问
 
 ## 实际效果
 <img width="2514" height="1093" alt="image" src="https://github.com/user-attachments/assets/6cacf94e-41eb-4a27-98bc-864743891bd4" />
