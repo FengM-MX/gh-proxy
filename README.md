@@ -15,7 +15,7 @@ github release、archive以及项目文件的加速项目，修改自[hunshcn/gh
 
 `ASSET_URL`是静态资源的url（实际上就是现在显示出来的那个输入框单页面）
 
-`PREFIX`是前缀，默认（根路径情况为"/gh"），如果自定义路由为example.com/gh/*，请将PREFIX改为 '/gh/'，注意，少一个杠都会错！建议PREFIX通过UUID生成，防止非法访问
+`PREFIX`是前缀，默认（根路径情况为"/gh"），如果自定义路由为example.com/gh/*，请将PREFIX改为 '/gh/'，注意，少一个杠都会错！建议PREFIX通过UUID生成，防止非法访问，例如：/gh/945b6cb6-0496-4cbd-a47e-b05c5de09e28/
 
 ## 实际效果
 <img width="2514" height="1093" alt="image" src="https://github.com/user-attachments/assets/6cacf94e-41eb-4a27-98bc-864743891bd4" />
