@@ -18,7 +18,8 @@
   - 点击添加新增路由：
     <img width="1982" height="399" alt="image" src="https://github.com/user-attachments/assets/acfe8fe1-6d3a-4d49-8902-83b80501d9ef" />
   - 区域选择自己在cloudflare中绑定域名，路由输入INPUT_CONTEXT_PATH定义的上下文，例如：works.example.com/gh/945b6cb6-0496-4cbd-a47e-b05c5de09e28/*，/gh/945b6cb6-0496-4cbd-a47e-b05c5de09e28/必须要和代码中的INPUT_CONTEXT_PATH值一致
-    <img width="385" height="787" alt="image" src="https://github.com/user-attachments/assets/be7eb14f-800b-4467-9e6b-4470e5d0b4c6" />
+    <img width="395" height="825" alt="image" src="https://github.com/user-attachments/assets/b51ccb97-30b2-405a-bbe4-79741c758eb9" />
+
 
 ## 实际效果
 <img width="2514" height="1093" alt="image" src="https://github.com/user-attachments/assets/6cacf94e-41eb-4a27-98bc-864743891bd4" />
